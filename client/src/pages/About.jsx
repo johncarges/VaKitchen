@@ -12,7 +12,7 @@ export default function About() {
             </div>
             <div className='about-page-cta'>
                 <h2>Start cookin!</h2>
-                <Link className = 'link-button' to='/appliances'>Check out our appliances</Link>
+                <Link className = 'link-button' to='/items'>Check out our appliances</Link>
             </div>
         </div>
     )

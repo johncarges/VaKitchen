@@ -5,6 +5,7 @@
 :root {
   --main-bg-color: rgb(111, 67, 25);
   --secondary-color: #836b1d; 
+  --footer-color: #222;
 }
 
 body {
@@ -23,6 +24,12 @@ body::-webkit-scrollbar {
 body {
   -ms-overflow-style: none;
   scrollbar-width:none;
+}
+
+.site-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
@@ -49,6 +56,16 @@ header a {
 header a:hover {
   color: #161616;
   text-decoration: underline;
+}
+
+footer {
+  background-color: var(--footer-color);
+  color:#aaa;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
 }
 
 .link-button {

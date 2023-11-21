@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function Items() {
     
@@ -11,10 +12,10 @@ export default function Items() {
     },[])
     
     const renderedItems = items.map(item => (
-        <div key={item.id} className='items-tile'>
+        <Link to={`/items/${item.id}`} key={item.id} className='items-tile'>
             <img src={item.imageUrl} alt={item.name}/>
             <p>{item.name} : {item.price}</p>
-        </div>  
+        </Link>  
     ))
     
     return (
