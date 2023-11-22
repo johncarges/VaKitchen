@@ -8,6 +8,7 @@ import Layout from './components/Layout';
 import ItemDetail from './pages/Items/ItemDetail';
 import UserLayout from './pages/User/UserLayout';
 import Saved from './pages/User/Saved';
+import Orders from './pages/User/Orders';
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
             <Route index element={<ItemDetail/>}/>
           </Route>
           <Route path='account' element={<UserLayout/>}>
-            <Route index element={<h1>Your Orders</h1>}/>
+            <Route index element={<Orders/>}/>
             <Route path='saved' element={<Saved/>}/>
             <Route path='settings' element={<h1>Settings</h1>}/>            
           </Route>
