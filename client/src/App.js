@@ -9,6 +9,7 @@ import ItemDetail from './pages/Items/ItemDetail';
 import UserLayout from './pages/User/UserLayout';
 import Saved from './pages/User/Saved';
 import Orders from './pages/User/Orders';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path='settings' element={<h1>Settings</h1>}/>            
           </Route>
         </Route>
+        <Route path='*' element={<NotFound/>}/>
       </Routes>
     </BrowserRouter>
   );

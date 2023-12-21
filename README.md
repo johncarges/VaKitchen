@@ -4,15 +4,18 @@
 
 - Homepage (Logo)
     Banner with current discount
+    Story
 
 - Items
 - Item detail page
 
 - About
-    Story
+    How it works
+    Pricing
 
-- Sign in
-
-- Cart
-
-- Wishlist
+- User
+    If not signed in: Sign in
+    Else User dashboard
+        Orders
+        Saved
+        Settings
