@@ -6,22 +6,25 @@ export default function Saved(){
     const [savedItems, setSavedItems] = useState([])
 
     useEffect(()=> {
-        fetch('/api/items/saved')
+        fetch('/saved_items')
             .then(r=>r.json())
-            .then(data=>setSavedItems(data.items))
+            .then(setSavedItems)
     },[])
     
     const renderedItems = savedItems.map(item => {
         return (
-            <ItemTile item={item} />
+            <ItemTile item={item} key={item.id}/>
         )
     })
 
 
     return (
-        <div className='saved-items-container'>
-            <h1>Saved items here</h1>
-            {renderedItems}
+        <div className='saved-items-page page'>
+            <div className='saved-items-container'>
+                <h1>Saved items here</h1>
+                {renderedItems}
+            </div>
+
         </div>
     )
 }

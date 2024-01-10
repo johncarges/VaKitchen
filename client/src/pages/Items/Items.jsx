@@ -1,35 +1,47 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ItemTile from "../../components/ItemTile";
+import CTABanner from "../../components/CTABanner";
 
 export default function Items() {
     
     const [items, setItems] = useState([])
+    
+    const [savedItemIds, setSavedItemIds] = useState([])
+
+    const user = false
 
     useEffect(()=>{
-        fetch('/api/items')
+        fetch('/items')
             .then(r=>r.json())
-            .then(data => setItems(data.items))
+            .then(setItems)
+        
+        fetch('/saved_items')
+            .then(r=>r.json())
+            .then(setSavedItemIds)   
+        
     },[])
     
     const renderedItems = items.map(item => (
-        <ItemTile item={item} />
-        // <Link to={`/items/${item.id}`} key={item.id} className='items-tile'>
-        //     <img src={item.imageUrl} alt={item.name}/>
-        //     <div className='item-info'>
-        //         <h3>{item.name}</h3>
-        //         <p>{item.price} <span>pts</span></p>
-        //     </div>
-        // </Link>  
+        <ItemTile item={item} saved={savedItemIds.includes(item.id)}/>
+        
     ))
+
+    const loggedInBanner = <h1>Tools for Every Dish</h1>
     
     return (
-        <div className='items-list-container'>
+        <div>
+            <CTABanner child={
+                <Link className='CTA' to="/plans">Get cookin' for as little as $10 a month</Link>
+            }/>
+            <div className='items-list-container'>
+                <h1>Items go here</h1>
+                
+                <div className='items-list'>
+                    {renderedItems}
+                </div>
+            </div>
 
-            <h1>Items go here</h1>
-           <div className='items-list'>
-            {renderedItems}
-           </div>
         </div>
     )
 }

@@ -2,14 +2,17 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
 
-import './server'
+// import './server'
 import Items from './pages/Items/Items';
 import Layout from './components/Layout';
 import ItemDetail from './pages/Items/ItemDetail';
 import UserLayout from './pages/User/UserLayout';
+import Plans from './pages/Plans/Plans'
 import Saved from './pages/User/Saved';
 import Orders from './pages/User/Orders';
 import NotFound from './pages/NotFound';
+import Signup from './pages/Signup';
+
 
 function App() {
   return (
@@ -17,6 +20,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout/>}>
           <Route index element={<Home />} />
+          <Route path='plans' element={<Plans />}/>
           <Route path='about' element={<About />} />
           <Route path='items' element={<Items />} />
           <Route path='items/:id' >
@@ -27,6 +31,7 @@ function App() {
             <Route path='saved' element={<Saved/>}/>
             <Route path='settings' element={<h1>Settings</h1>}/>            
           </Route>
+          <Route path='signup' element={<Signup/>}/>
         </Route>
         <Route path='*' element={<NotFound/>}/>
       </Routes>

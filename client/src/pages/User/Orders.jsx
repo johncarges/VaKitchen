@@ -13,42 +13,29 @@ export default function Orders() {
     const [nextOrder, setNextOrder] = useState(initialState)
 
     useEffect(()=>{
-        fetch('/api/items/1')
+        fetch('/items/49')
             .then(r=>r.json())
             .then(data => setCurrentOrder({
                 type: 'current',
                 status: 'due 12/3',
-                item:data.items
+                item:{...data, imageUrl: data.image_url}
             }))
-        fetch('/api/items/2')
+        fetch('/items/50')
             .then(r=>r.json())
             .then(data => setNextOrder({
                 type: 'next',
                 status: 'ready to ship',
-                item:data.items
+                item:{...data, imageUrl: data.image_url}
             }))
 
     },[])
     // CURRENTLY JUST FETCHES FIRST ITEM AS CURRENT, SECOND AS QUEUED
 
     return (
-        <div>
-            <OrderTile order={currentOrder} />
-            <div className='order-container'>
-                <h4>Current Order</h4>
-                <hr style={{width: '95%', color: "#999"}}></hr>
-                <div className='order-details-container'>
-                    <img className='order-details-image' src={currentOrder.item.imageUrl} alt={currentOrder.item.name}/>
-                    <div className='order-details-information'></div>
-                </div>
-            </div>
-            <div className='order-container'>
-            <h4>Next Order</h4>
-                <hr style={{width: '95%', color: "#999"}}></hr>
-                <div className='order-details-container'>
-                    <img className='order-details-image' src={nextOrder.item.imageUrl} alt={nextOrder.item.name}/>
-                    <div className='order-details-information'></div>
-                </div>
+        <div className='orders-page-container page'>
+            <div>
+                <OrderTile order={currentOrder} />
+                <OrderTile order={nextOrder} />
             </div>
         </div>
     )
