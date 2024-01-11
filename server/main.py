@@ -4,10 +4,19 @@ from typing import Optional
 import psycopg2
 from pathlib import Path
 import time
+from fastapi.middleware.cors import CORSMiddleware
 
 import database
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"], # here
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 
 class ItemSchema(BaseModel):

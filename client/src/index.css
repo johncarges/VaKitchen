@@ -4,7 +4,7 @@
 
 :root {
   --main-page-color: #ecc;
-  --main-bg-color: #7d4b1c;
+  --main-bg-color: #915721;
   --secondary-color: #836b1d; 
   --footer-color: #222;
 }
@@ -131,10 +131,32 @@ footer {
 /* HOME PAGE */
 
 
+.carousel-container {
+  display: flex;
+  justify-content: center;
+}
+
+.carousel-page {
+  width:600px;
+  height:200px;
+}
+
+.carousel-tile {
+  width:30%;
+  object-fit: contain;
+}
+
+.carousel-tile-image {
+  object-fit: contain;
+  max-width: 100%;
+}
+
 
 
 
 /* ABOUT PAGE */
+
+
 
 .about-hero-image {
   width: 100%;
@@ -142,15 +164,22 @@ footer {
   object-fit: cover;
 }
 
+.about-page-centerer {
+  display: flex;
+  margin-top:15px;
+  justify-content: center
+}
+
 .about-page-content {
   padding-inline: 20px;
+  max-width: 1000px;
 }
 
 .about-page-cta {
   display: flex;
   flex-direction: column;
   align-items:center;
-  margin: 10px;
+  margin: 10px 50px;
   padding: 10px 20px;
   background-color: var(--main-bg-color);
   border-radius:5px;

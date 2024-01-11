@@ -22,9 +22,11 @@ export default function About() {
             <CTABanner child={
                 <Link className='CTA' to="plans">Get cookin' for as little as $10 a month</Link>
             }/>
-            <div className='about-page-content'>
-                <h1>Our Mission</h1>
-                <p>{missionText}</p>
+            <div className='about-page-centerer'>
+                <div className='about-page-content'>
+                    <h1>Our Mission</h1>
+                    <p>{missionText}</p>
+                </div>
             </div>
             <div className='about-page-cta'>
                 <h2>Your Destination Awaits!</h2>
