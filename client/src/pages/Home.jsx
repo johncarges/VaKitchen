@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ItemCarousel from "../components/ItemCarousel";
 
 export default function Home() {
     
@@ -15,7 +16,7 @@ export default function Home() {
 
             <div className='home-page-items'>
                 <Link to='items'>Find Your Gadgets</Link>
-
+                <ItemCarousel />
             </div>
 
         </div>
