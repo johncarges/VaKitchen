@@ -3,4 +3,5 @@ dist/
 *.env
 .DS_Store
 node_modules/
-/__pycache__
+**/__pycache__/
+server/.venv
