@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useLoaderData } from "react-router-dom";
+
+import {UserContext} from '../../userContext'
 import ItemTile from "../../components/ItemTile";
 import CTABanner from "../../components/CTABanner";
 
@@ -8,6 +10,9 @@ export default function Items() {
     const data = useLoaderData()
     const items = data.items
     const [savedItemIds, setSavedItemIds] = useState(data.savedItemIds)
+
+    const {user,changeUser} = useContext(UserContext)
+    console.log(user)
     
     const addSave = (new_id) => {
         setSavedItemIds([...savedItemIds, new_id])

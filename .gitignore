@@ -4,4 +4,4 @@ dist/
 .DS_Store
 node_modules/
 **/__pycache__/
-server/.venv
+server/.venv/

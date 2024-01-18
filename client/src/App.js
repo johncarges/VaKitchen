@@ -4,10 +4,11 @@ import {
   createRoutesFromElements, 
   Route
 } from 'react-router-dom';
+
+import UserProvider, {userContext} from './userContext';
+
 import Home from './pages/Home';
 import About from './pages/About';
-
-// import './server'
 import Items, {loader as itemsLoader} from './pages/Items/Items';
 import Layout from './components/Layout';
 import ItemDetail, {loader as itemDetailLoader} from './pages/Items/ItemDetail';
@@ -47,7 +48,9 @@ const router = createBrowserRouter(createRoutesFromElements(
 
 function App() {
   return (
-    <RouterProvider router={router}/>
+    <UserProvider>
+      <RouterProvider router={router}/>
+    </UserProvider>
   )
 }
 
