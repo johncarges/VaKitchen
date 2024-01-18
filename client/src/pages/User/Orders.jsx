@@ -41,3 +41,7 @@ export default function Orders() {
     )
 
 }
+
+export async function loader() {
+    
+}

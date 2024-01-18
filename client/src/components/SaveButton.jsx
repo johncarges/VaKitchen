@@ -2,27 +2,32 @@ import React from 'react'
 
 export default function SaveButton(props) {
 
-    const {itemId, saved} = props
+    const {itemId, saved, addSave, deleteSave} = props
 
-    const onSave = () => {
-        console.log({"item_id":itemId,"user_id":1})
+    const onSave = (event) => {
+        event.preventDefault()
         fetch('/saved_items', {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({"item_id":itemId, "user_id":1})
         })
-            .then(r=>r.json())
-            .then(console.log)
+            .then(r=> {
+                if (r.ok){
+                    addSave(itemId)
+            }})
+            
     }
 
-    const onRemoveSave = () => {
+    const onRemoveSave = (event) => {
+        event.preventDefault()
         fetch('/saved_items', {
             method: "DELETE",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({"item_id":itemId, "user_id": 1})
         })
-            .then(r=>r.json())
-            .then(console.log)
+            .then(r =>{
+                if (r.ok) deleteSave(itemId)
+            })
     }
     
 

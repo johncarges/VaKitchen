@@ -1,28 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { useLoaderData } from "react-router-dom";
 import bgImg from "../../assets/about_page_bg.webp"
 
 import PlanTile from "../../components/PlanTile";
 
 export default function Plans() {
     
-    const [plans, setPlans] = useState([])
+    const plans = useLoaderData()
 
-    const user = false
-
-    useEffect(()=>{
-        fetch('/plans')
-            .then(r=>r.json())
-            .then(setPlans)
-            // .then(data => setplans(data.plans))
-    },[])
     
     const renderedplans = plans.map(plan => (
         <PlanTile plan={plan} key={plan.id}/>
         
     ))
 
-    const loggedInBanner = <h1>Tools for Every Dish</h1>
     
     return (
         <div>
@@ -41,4 +32,11 @@ export default function Plans() {
 
         </div>
     )
+}
+
+export async function loader() {
+    const res = await fetch('/plans')
+    const data = await res.json()
+
+    return data
 }
