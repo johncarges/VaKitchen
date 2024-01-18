@@ -4,7 +4,7 @@ import SaveButton from "./SaveButton";
 
 export default function ItemTile(props) {
     
-    const {item, saved} = props
+    const {item, saved, addSave, deleteSave} = props
 
     return (
         <Link to={`/items/${item.id}`} key={item.id} className='items-tile'>
@@ -15,7 +15,7 @@ export default function ItemTile(props) {
                     <p>{item.price} <span>pts</span></p>
                 </div>
                 <div>
-                    <SaveButton itemId={item.id} saved={saved}/>
+                    <SaveButton itemId={item.id} saved={saved} addSave={addSave} deleteSave={deleteSave}/>
                 </div>
             </div>
         </Link> 

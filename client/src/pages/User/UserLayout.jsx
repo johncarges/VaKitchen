@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, redirect } from "react-router-dom";
 import UserDashboard from "./UserDashboard";
 
 export default function UserLayout() {
@@ -9,4 +9,13 @@ export default function UserLayout() {
             <Outlet/>
         </>
     )
+}
+
+export async function loader() {
+    const isLoggedIn = true
+
+    if (!isLoggedIn) {
+        throw redirect('/login')
+    }
+    return null
 }

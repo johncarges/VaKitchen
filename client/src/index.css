@@ -192,11 +192,13 @@ footer {
 }
 
 /* ITEMS PAGE */ 
-.items-list-container {
+.items-list-container,
+.saved-items-list-container{
   padding-inline: 20px
 }
 
-.items-list {
+.items-list,
+.saved-items-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-items: center;
@@ -219,6 +221,39 @@ footer {
   justify-content: space-between;
   border: solid 2px #000
 }
+
+.item-detail-main {
+  display: flex;
+  flex-direction: row;
+}
+
+.item-detail-image-container {
+  width: 50%;
+}
+
+.item-detail-image-container > img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.item-detail-info {
+  width: 50%;
+  padding-left: 2em;
+}
+
+.item-save-buttons {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.item-save-buttons > button {
+  width: 49%;
+  background-color: var(--main-bg-color);
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
 
 /* PLAN PAGE */
 
@@ -280,9 +315,77 @@ footer {
 
 }
 
+/* SIGNUP PAGE */
+.signup-container {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signup-form {
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  width: 100%;
+  max-width:600px
+}
+
+.signup-form > * {
+  border: solid 1px black;
+  border-radius: 3px;
+  padding-left: 5px;
+  margin-bottom: 5px;
+}
+
+.signup-form > p {
+  border: none;
+  color: red;
+  font-size:medium;
+  height: 30px;
+}
 
 /* USER PAGES */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-inline: 27px
+}
 
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+}
+
+.login-form > input {
+  border: 1px solid rgb(181, 181, 181);
+  height: 40px;
+  text-indent: 10px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+  font-weight: 300;
+}
+
+.login-form > input:focus {
+  outline: none;
+}
+
+.login-form > input:first-of-type {
+  border-radius: 5px 5px 0px 0px;
+}
+
+.login-form > input:last-of-type {
+  border-radius: 0px 0px 5px 5px;
+  border-top: none;
+}
+
+.login-form > button {
+  margin: 1em;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--main-bg-color)
+}
 
 .order-container {
   background-color: var(--secondary-color);

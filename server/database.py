@@ -61,8 +61,12 @@ def insert(sql_path: str, params:dict):
     conn, cursor = db_connect()
     
     sql = read_sql_query(sql_path=sql_path)
+    try:
+        cursor.execute(sql, params)
+    except Exception as e:
+        print(e)
+        raise e
     
-    cursor.execute(sql, params)
     response = cursor.fetchone()
     conn.commit()
     
@@ -100,6 +104,8 @@ def delete(sql_path: str, params: dict):
     conn.close()
 
     return response
+
+
 
 
 def clear_table(sql_path: str):
