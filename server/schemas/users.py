@@ -9,3 +9,13 @@ class UserSignup(BaseModel):
 class UserLogin(BaseModel):
     email: str
     password: str
+
+class User(BaseModel):
+    email: str
+    hashed_password: str
+    plan_id: int
+
+class UserResponse(BaseModel):
+    email: str
+    id: int
+    plan_id: int

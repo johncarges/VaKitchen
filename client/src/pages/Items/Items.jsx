@@ -11,7 +11,7 @@ export default function Items() {
     const items = data.items
     const [savedItemIds, setSavedItemIds] = useState(data.savedItemIds)
 
-    const {user,changeUser} = useContext(UserContext)
+    const {user} = useContext(UserContext)
     console.log(user)
     
     const addSave = (new_id) => {

@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
-
+from .users import UserResponse
 
 class Token(BaseModel):
     access_token: str
@@ -9,3 +9,6 @@ class Token(BaseModel):
 class TokenData(BaseModel):
     id: Optional[str] = None
     
+class LoginResponse(BaseModel):
+    token: str
+    user: UserResponse

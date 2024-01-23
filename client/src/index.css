@@ -387,6 +387,16 @@ footer {
   background-color: var(--main-bg-color)
 }
 
+.user-dashboard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.user-dashboard > p {
+  padding: 1rem;
+}
+
 .order-container {
   background-color: var(--secondary-color);
   border-radius: 5px;
