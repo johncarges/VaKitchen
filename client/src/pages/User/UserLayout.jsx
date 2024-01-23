@@ -1,6 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Outlet, redirect } from "react-router-dom";
+import Cookies from 'universal-cookie'
+import {jwtDecode} from 'jwt-decode'
 import UserDashboard from "./UserDashboard";
+import UserContext from '../../userContext'
 
 export default function UserLayout() {
     return (
@@ -12,9 +15,16 @@ export default function UserLayout() {
 }
 
 export async function loader() {
-    const isLoggedIn = true
+    const cookie = new Cookies()
+    const token = cookie.get('jwt_authorization')
+    console.log(token)
+    const res = await fetch('/checkuser', {
+        headers: {'accept':'application/json', 'Authorization': `Bearer ${token}`}
+    })
 
-    if (!isLoggedIn) {
+    const user = await res.json()
+    console.log(user.id)
+    if (!user.id) {
         throw redirect('/login')
     }
     return null

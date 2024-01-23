@@ -10,8 +10,8 @@ router = APIRouter(tags=['User'])
 
 
 @router.get('/userplan',status_code=200, response_model=plans.UserPlan)
-def get_user_plan(user_id: int = Depends(oauth2.get_current_user)):
+def get_user_plan(user = Depends(oauth2.get_current_user)):
 
-    user_plan = database.select_one('sql/plans/get_user_plan.sql', {"user_id":user_id})
+    user_plan = database.select_one('sql/plans/get_user_plan.sql', {"user_id":user.id})
 
     return user_plan
