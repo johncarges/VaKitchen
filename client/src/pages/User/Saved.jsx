@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { redirect, useLoaderData } from "react-router-dom";
 
 import ItemTile from '../../components/ItemTile'
+import { checkSession } from "../../auth";
 
 
 export default function Saved(){
@@ -29,7 +30,9 @@ export default function Saved(){
 }
 
 export async function savedLoader () {
-    const itemRes = await fetch('/saved_items')
+    const userId = await checkSession()
+    if (!userId) throw redirect('/login')
+    const itemRes = await fetch(`/saved_items/?user_id=${userId}`)
     if (!itemRes.ok) {
         throw {
             message: "Failed to fetch Saved Items"

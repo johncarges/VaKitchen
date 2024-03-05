@@ -200,7 +200,7 @@ footer {
 .items-list,
 .saved-items-list {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
   gap: 30px;
   margin-top: 40px
@@ -219,7 +219,10 @@ footer {
 .item-info-container {
   display: flex;
   justify-content: space-between;
-  border: solid 2px #000
+}
+
+.item-tile-save-button {
+  margin: 0.5rem;
 }
 
 .item-detail-main {
@@ -254,7 +257,67 @@ footer {
   border-radius: 3px;
 }
 
+.show-filters {
+  margin-top: 1em;
+  margin-right: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
 
+.show-filters button {
+  border-radius: 5px;
+  border: none;
+  background-color: var(--main-bg-color)
+}
+
+.filter-overlay {
+  position: fixed; 
+  display: none; 
+  width: 40%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  /* left: 0; */
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.9); /* Black background with opacity */
+  z-index: 2; 
+  /* cursor: pointer;  */
+}
+
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  padding: 200px 20px;
+}
+
+.filter-container > div{
+  padding: 100px 0px;
+}
+
+.filter-container > i {
+  position:fixed;
+  padding: 3rem;
+  top: 0;
+  right: 0;
+  font-size: xx-large;
+  cursor: pointer;
+}
+
+.filter-list {
+  list-style: none;
+}
+
+.filter-list ul {
+  list-style: none;
+}
+
+.filter-list i {
+  background-size: 10px;
+  width: 10px;
+  font-size: .6em;
+  padding-right: 1em;
+}
 /* PLAN PAGE */
 
 .plans-list {
@@ -263,9 +326,9 @@ footer {
   justify-content:space-around
 }
 
-.plans-list-content {
+/* .plans-list-content {
 
-}
+} */
 
 .plan-container {
   border: solid 1px black;

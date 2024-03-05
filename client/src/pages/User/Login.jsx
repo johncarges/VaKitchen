@@ -43,12 +43,15 @@ export default function Login() {
                 expires: new Date(jwt_data.exp * 1000)
             })
             login(data.user)
-            navigate('/account')
+            navigate('/account', {replace: true})
         })
+        .catch(err => console.log(err))
     }
 
     return (
         <div className='login-container'>
+            <h1>Welcome Back!</h1>
+            
             <form onSubmit={onSubmit} className='login-form'>
                 <input
                     name="email"
@@ -66,6 +69,7 @@ export default function Login() {
 
                 <button type="submit">Log in</button>
             </form>
+            <h3></h3>
         </div>
     )
 

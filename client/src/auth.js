@@ -31,3 +31,13 @@ export async function logout() {
 
     cookies.remove("jwt_authorization")
 }
+
+export async function checkSession() {
+    //  Return user id (int) or null
+    const cookies = new Cookies()
+
+    const jwt_token = cookies.get("jwt_authorization")
+    if (!jwt_token) return null
+    const jwt_data = jwtDecode(jwt_token)
+    return parseInt(jwt_data.sub)
+}

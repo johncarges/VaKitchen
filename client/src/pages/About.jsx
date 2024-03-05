@@ -20,7 +20,7 @@ export default function About() {
         <div className='about-page-container'>
             {/* <img src={bgImg} className='about-hero-image'/> */}
             <CTABanner child={
-                <Link className='CTA' to="plans">Get cookin' for as little as $10 a month</Link>
+                <Link className='CTA' to="/plans">Get cookin' for as little as $10 a month</Link>
             }/>
             <div className='about-page-centerer'>
                 <div className='about-page-content'>
