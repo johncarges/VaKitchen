@@ -2,11 +2,11 @@ from fastapi import FastAPI, HTTPException, Response, APIRouter
 from pydantic import BaseModel
 from typing import Optional
 
-from schemas import item_saves
+from schemas import item_save_schema
 import oauth2
 import database
 
-ItemSave = item_saves.ItemSave
+ItemSave = item_save_schema.ItemSave
 
 router = APIRouter(tags=['Saved Items'])
 
@@ -25,8 +25,12 @@ def get_saved_item_ids(user_id: int=1):
 
     return [item["id"] for item in items]
 
+
+
 @router.post("/saved_items",  status_code=201)
 def add_saved_items(item_save: ItemSave):
+
+    print(item_save)
 
     try:
         response = database.insert('sql/item_saves/save_item.sql',item_save.model_dump())

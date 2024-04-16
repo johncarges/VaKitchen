@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLoaderData, useParams } from "react-router-dom";
 import SaveButton from "../../components/SaveButton";
+import { checkSession } from "../../auth";
 
 export default function ItemDetail() {
 
-    const itemData = useLoaderData()
-    
-    console.log(Object.keys(itemData))
+    const {userId, itemData} = useLoaderData()
+    const [saved, setSaved] = useState(itemData.saved)
+
+    const toggleSave = () => {
+        if (!userId) return null
+
+        const method = saved ? 'DELETE' : 'POST'
+        fetch('/saved_items', {
+            method: method,
+            headers: {'content-type':'application/json'},
+            body: JSON.stringify({item_id:itemData.id, user_id:userId})
+        }).then(r=>{
+            if (r.ok) {
+                setSaved(prev => !prev)
+            }
+        })
+    }
 
     return (
         <div className='page item-detail-page'>
@@ -25,9 +40,16 @@ export default function ItemDetail() {
                     <h1>{itemData.name}</h1>
                     <p>{itemData.description}</p>
                     <div className='item-save-buttons'>
-                        <button>
-                            <i className="fa-regular fa-heart"></i> Save
-                        </button>
+                        {
+                            saved 
+                            ? <button onClick={toggleSave}>
+                                <i className="fa-solid fa-heart"></i> Saved
+                            </button>
+                            : <button onClick={toggleSave}>
+                                <i className='fa-regular fa-heart'></i> Save
+                            </button>
+                        }
+                        
                         <button>
                             <i className="fa-solid fa-plus"></i> Add to Queue
                         </button>
@@ -44,7 +66,13 @@ export default function ItemDetail() {
 
 export async function loader({params}) {
     
-    const res = await fetch(`/items/${params.id}`)
+    let url = `/items/${params.id}`
+    const userRes = await checkSession()
+    
+    if (userRes) {
+        url += '?user_id=' + userRes
+    }
+    const res = await fetch(url)
     if (!res.ok) {
         throw {
             message: "Failed to fetch item details",
@@ -52,7 +80,9 @@ export async function loader({params}) {
             status: res.status
         }
     }
-    const data = await res.json()
+    const itemData = await res.json()
+    const data = {userId:userRes, itemData: itemData}
+
     return data
 
 }

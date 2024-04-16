@@ -17,16 +17,16 @@ body {
   /* font-family: "Inter", sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-body::-webkit-scrollbar {
-  display: none;
-}
-
-body {
   -ms-overflow-style: none;
   scrollbar-width:none;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* body {
+} */
 
 .site-wrapper {
   min-height: 100vh;
@@ -207,7 +207,7 @@ footer {
 }
 
 .items-tile {
-  color: #aaa;
+  color: #222;
   text-decoration: none;
 }
 
@@ -450,13 +450,24 @@ footer {
   background-color: var(--main-bg-color)
 }
 
+.signup-question {
+  margin-top: 3rem;
+}
+
+.signup-cta  {
+  font-style: italic;
+  color: black;
+}
+
 .user-dashboard {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.user-dashboard > p {
+.user-dashboard > button {
+  border: none;
+  background: none;
   padding: 1rem;
 }
 

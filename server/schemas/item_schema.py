@@ -8,6 +8,7 @@ class ItemSchema(BaseModel):
     description: str = None
     is_avaialable: bool = True
     image_url: str = None
+    saved: bool = False
 
 class ItemPost(BaseModel):
     name: str

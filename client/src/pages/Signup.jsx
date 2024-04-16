@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
-import { Link, useSearchParams, useLoaderData } from "react-router-dom";
+import { useNavigate, useSearchParams, useLoaderData } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
+import { jwtDecode } from "jwt-decode";
+import Cookies from 'universal-cookie'
 
+import { UserContext } from "../userContext";
 
 export default function Signup() {
     
+    const cookies = new Cookies()
+    const navigate = useNavigate()
+    const {login} = useContext(UserContext)
     const [searchParams, setSearchParams] = useSearchParams()
 
     const planData = useLoaderData()
 
     const initialForm = {
-        plan: searchParams.get('plan'),
+        plan: searchParams.get('plan') || planData[0].id,
         email:'',
         password:'',
         passwordCheck:''
@@ -30,12 +36,40 @@ export default function Signup() {
         setError(null)
     }    
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
         if (formData.password !== formData.passwordCheck) {
             setError('Passwords must match')
         }
-        
+        const body = {
+            email: formData.email,
+            password: formData.password,
+            plan_id: parseInt(formData.plan)
+        }
+        console.log(body)
+        const res = await fetch('/signup',{
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers:{
+                'accepts':'application/json',
+                'content-type':'application/json'
+            }
+        })
+
+        if (!res.ok) {
+            const err = await res.json()
+            setError(err.detail)
+            return null
+        }
+
+        const data = await res.json()
+        const jwt_token = data.token
+        const jwt_data = jwtDecode(jwt_token)
+        cookies.set('jwt_authorization',jwt_token, {
+            expires: new Date(jwt_data.exp*1000)
+        })
+        login(data.user)
+        navigate('/account')
     }
     
     const renderedPlans = planData.map(plan => {

@@ -30,6 +30,7 @@ export async function logout() {
     const cookies = new Cookies()
 
     cookies.remove("jwt_authorization")
+    console.log(cookies.getAll())
 }
 
 export async function checkSession() {

@@ -2,7 +2,7 @@ import React, {useState, useContext} from "react"
 import Cookies from 'universal-cookie'
 import { jwtDecode } from 'jwt-decode'
 import { UserContext } from "../../userContext"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 
 export default function Login() {
 
@@ -14,6 +14,8 @@ export default function Login() {
         email: '',
         password:''
     })
+
+    const [error, setError] = useState(null)
 
     const {login} = useContext(UserContext)
 
@@ -45,7 +47,7 @@ export default function Login() {
             login(data.user)
             navigate('/account', {replace: true})
         })
-        .catch(err => console.log(err))
+        .catch(err => setError(err))
     }
 
     return (
@@ -66,10 +68,15 @@ export default function Login() {
                     onChange={onChange}
                     placeholder='Password'
                 ></input>
-
+                <p>{error ? "Could not find user": ''}</p>
                 <button type="submit">Log in</button>
             </form>
-            <h3></h3>
+            <h3 className='signup-question'>New to Kitchen Vacation?</h3>
+            <Link to='/signup' className='signup-cta'>
+                <div className='signup-cta'>
+                    Sign up
+                </div>
+            </Link>
         </div>
     )
 
