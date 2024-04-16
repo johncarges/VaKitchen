@@ -2,7 +2,7 @@ import React, {useState, useContext} from "react"
 import Cookies from 'universal-cookie'
 import { jwtDecode } from 'jwt-decode'
 import { UserContext } from "../../userContext"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 
 export default function Login() {
 
@@ -14,6 +14,8 @@ export default function Login() {
         email: '',
         password:''
     })
+
+    const [error, setError] = useState(null)
 
     const {login} = useContext(UserContext)
 
@@ -43,12 +45,15 @@ export default function Login() {
                 expires: new Date(jwt_data.exp * 1000)
             })
             login(data.user)
-            navigate('/account')
+            navigate('/account', {replace: true})
         })
+        .catch(err => setError(err))
     }
 
     return (
         <div className='login-container'>
+            <h1>Welcome Back!</h1>
+            
             <form onSubmit={onSubmit} className='login-form'>
                 <input
                     name="email"
@@ -63,9 +68,15 @@ export default function Login() {
                     onChange={onChange}
                     placeholder='Password'
                 ></input>
-
+                <p>{error ? "Could not find user": ''}</p>
                 <button type="submit">Log in</button>
             </form>
+            <h3 className='signup-question'>New to Kitchen Vacation?</h3>
+            <Link to='/signup' className='signup-cta'>
+                <div className='signup-cta'>
+                    Sign up
+                </div>
+            </Link>
         </div>
     )
 

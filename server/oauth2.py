@@ -3,7 +3,7 @@ from fastapi.security import OAuth2PasswordBearer
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
 
-from schemas import tokens, users
+from schemas import user_schema, token_schema
 import database
 
 SECRET_KEY = '2dbb0cc4c96761d5f551d1b81215c9a38e12d1fb6c20b112562d7a973e8b8a52'
@@ -13,7 +13,7 @@ EXP_TIME_MINUTES = 60
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='login')
 
 
-def create_access_token(data: dict, expires_delta: timedelta = timedelta(minutes=30)):
+def create_access_token(data: dict, expires_delta: timedelta = timedelta(minutes=EXP_TIME_MINUTES)):
     to_encode = data.copy()
 
     expire = datetime.utcnow() + expires_delta
@@ -41,7 +41,7 @@ def verify_access_token(token: str, credentials_exception):
     
     return id
     
-def get_current_user(token: str = Depends(oauth2_scheme)) -> users.User:
+def get_current_user(token: str = Depends(oauth2_scheme)) -> user_schema.User:
     credentials_exception = HTTPException(status_code=403, 
                                           detail="Could not validate credentials",
                                           headers={"WWW-Authenticate":"Bearer"})
@@ -52,7 +52,7 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> users.User:
         raise credentials_exception
     return user
 
-def get_current_active_user(user: users.User = Depends(get_current_user)):
+def get_current_active_user(user: user_schema.User = Depends(get_current_user)):
     if user.get('disabled'):
         raise HTTPException(status_code=400, detail="Inactive user")
     return user

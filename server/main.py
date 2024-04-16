@@ -5,7 +5,7 @@ import psycopg2
 from pathlib import Path
 import time
 from fastapi.middleware.cors import CORSMiddleware
-from routers import user, auth, plan, item_save, item
+from routers import user, auth, plan, item_save, item, tag
 
 import database
 
@@ -20,7 +20,7 @@ app.add_middleware(
 )
 
 
-@app.get('/')
+@app.get('/',tags=['Test'])
 def root():
     return {"Hello": "World"}
 
@@ -29,3 +29,4 @@ app.include_router(item.router)
 app.include_router(item_save.router)
 app.include_router(plan.router)
 app.include_router(user.router)
+app.include_router(tag.router)

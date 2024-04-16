@@ -2,40 +2,17 @@ import React from 'react'
 
 export default function SaveButton(props) {
 
-    const {itemId, saved, addSave, deleteSave} = props
+    const {itemId, saved, toggleSave} = props
 
-    const onSave = (event) => {
-        event.preventDefault()
-        fetch('/saved_items', {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({"item_id":itemId, "user_id":1})
-        })
-            .then(r=> {
-                if (r.ok){
-                    addSave(itemId)
-            }})
-            
-    }
+    const className = saved ? "fa-solid fa-heart" : "fa-regular fa-heart"
 
-    const onRemoveSave = (event) => {
-        event.preventDefault()
-        fetch('/saved_items', {
-            method: "DELETE",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({"item_id":itemId, "user_id": 1})
-        })
-            .then(r =>{
-                if (r.ok) deleteSave(itemId)
-            })
+    const onClick = (e) => {
+        e.preventDefault()
+        toggleSave(itemId, saved)
     }
     
 
-
-    return (saved 
-        ? <i className="fa-solid fa-heart" onClick={onRemoveSave}></i>
-        : <i className="fa-regular fa-heart" onClick={onSave}></i>
-    )
+    return <i className={className} onClick={onClick}></i>
 }
 
 

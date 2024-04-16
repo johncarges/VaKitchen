@@ -8,7 +8,7 @@ export default function UserDashboard() {
     const  activeStyles = {
         fontWeight: "bold",
         textDecoration: 'underline',
-        color: '#ccc'
+        color: 'black'
     }
 
     const navigate = useNavigate()
@@ -16,9 +16,9 @@ export default function UserDashboard() {
 
     const {logout} = useContext(UserContext)
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
         logout()
-        authLogout()
+        await authLogout()
         navigate('/')
     }
 
@@ -29,7 +29,7 @@ export default function UserDashboard() {
                 <NavLink style={style} to='saved'>Saved</NavLink>
                 <NavLink style={style} to='settings'>Settings</NavLink>
             </div>
-            <p onClick={handleLogout}>Log Out</p>
+            <button onClick={handleLogout}>Log Out</button>
         </header>
     )
 }
